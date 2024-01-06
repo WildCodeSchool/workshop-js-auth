@@ -16,6 +16,9 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+        loader: () => {
+          return fetch(`${import.meta.env.VITE_BACKEND_URL}/api/items`);
+        },
       },
       {
         path: "/login",

@@ -39,6 +39,12 @@ const read = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
+  // Only allowed if authentified
+  if (req.body.userId == null) {
+    res.sendStatus(401);
+    return;
+  }
+
   // Extract the item data from the request body
   const item = { ...req.body, user_id: 0 }; // 0 is definitely a bad idea...
 
