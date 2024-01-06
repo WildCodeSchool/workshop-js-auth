@@ -12,8 +12,8 @@ defaults:
       layout: "default" # possible values: default or tic-tac
 
 style: dev # possible values: dev, data, ciber, design or wild.
-title: "Auth with Express"
-description: "abc"
+title: "Auth"
+description: "Développer une authentification sécurisée"
 # type: ''
 # main_image: '' # http or relative path to image
 show_clone: true
