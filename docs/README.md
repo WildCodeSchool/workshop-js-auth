@@ -74,3 +74,5 @@ La solution ?
 | requête SQL | backend/models/UserManager.js (readByEmail) |
 
 </details>
+
+[Hacher les mots de passes](HASHING-PASSWORD)
