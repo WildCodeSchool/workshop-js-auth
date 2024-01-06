@@ -50,7 +50,7 @@ function Home() {
       {user != null && (
         <form onSubmit={handleSubmit}>
           <div>
-            {/* Champ pour l'title */}
+            {/* Champ pour le title */}
             <label htmlFor="title">title</label>{" "}
             <input ref={titleRef} type="text" id="title" />
           </div>
