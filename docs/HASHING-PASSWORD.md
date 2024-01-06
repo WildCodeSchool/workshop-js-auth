@@ -28,6 +28,7 @@ git switch hash-password
 Relancez le projet en effectuant les migrations de base de données :
 
 ```bash
+npm install
 npm run db:migrate
 npm run dev
 ```
