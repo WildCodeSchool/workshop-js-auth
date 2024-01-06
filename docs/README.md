@@ -24,26 +24,27 @@ Vous pouvez les tester en créant un compte utilisateur, et en vous connectant.
 ![Architecture Web](/assets/web.png/)
 {: .text-center }
 
-Dans cette première partie, explorez la création de compte utilisateur. Consultez le schéma ci-dessus, représentant l'architecture de l'application web. Remplissez la grille ci-dessous en indiquant les fichiers associés à chaque composant du schéma.
+Dans cette première partie, explorez la création de compte utilisateur.
+Consultez le schéma ci-dessus, représentant l'architecture de l'application web. Remplissez la grille ci-dessous en indiquant les éléments clés pour chaque étape du schéma.
 
-| Composant   | Fichier associé |
-| ----------- | --------------- |
-| React       |                 |
-| fetch       |                 |
-| Express     |                 |
-| requête SQL |                 |
+| Étape              | Réponse |
+| ------------------ | ------- |
+| Composant React    |         |
+| body du fetch      |         |
+| Controller Express |         |
+| Manager SQL        |         |
 
 <details markdown=block>
 <summary markdown=span>
 La solution ?
 </summary>
 
-| Composant   | Fichier associé                            |
-| ----------- | ------------------------------------------ |
-| React       | frontend/src/pages/Register.jsx            |
-| fetch       | frontend/src/pages/Register.jsx (ligne 31) |
-| Express     | backend/controllers/userControllers.js     |
-| requête SQL | backend/models/UserManager.js (create)     |
+| Étape              | Réponse                                |
+| ------------------ | -------------------------------------- |
+| Composant React    | frontend/src/pages/Register.jsx        |
+| body du fetch      | { email, password }                    |
+| Controller Express | backend/controllers/userControllers.js |
+| Manager SQL        | backend/models/UserManager.js (create) |
 
 </details>
 
@@ -52,27 +53,32 @@ La solution ?
 ![Architecture Web](/assets/web.png/)
 {: .text-center }
 
-Dans cette seconde partie, concentrez-vous sur la requête de connexion. Utilisez le schéma ci-dessus comme référence et remplissez la grille ci-dessous en identifiant les fichiers associés à chaque composant.
+Dans cette seconde partie, concentrez-vous sur la requête de connexion.
+Utilisez le schéma ci-dessus comme référence et remplissez la grille ci-dessous en identifiant les éléments associés à chaque étape.
 
-| Composant   | Fichier associé |
-| ----------- | --------------- |
-| React       |                 |
-| fetch       |                 |
-| Express     |                 |
-| requête SQL |                 |
+| Étape              | Réponse |
+| ------------------ | ------- |
+| Composant React    |         |
+| body du fetch      |         |
+| Controller Express |         |
+| Manager SQL        |         |
 
 <details markdown=block>
 <summary markdown=span>
 La solution ?
 </summary>
 
-| Composant   | Fichier associé                             |
-| ----------- | ------------------------------------------- |
-| React       | frontend/src/pages/Login.jsx                |
-| fetch       | frontend/src/pages/Login.jsx (ligne 20)     |
-| Express     | backend/controllers/authControllers.js      |
-| requête SQL | backend/models/UserManager.js (readByEmail) |
+| Composant          | Réponse                                     |
+| ------------------ | ------------------------------------------- |
+| Composant React    | frontend/src/pages/Login.jsx                |
+| body du fetch      | { email, password }                         |
+| Controller Express | backend/controllers/authControllers.js      |
+| Manager SQL        | backend/models/UserManager.js (readByEmail) |
 
 </details>
 
-[Hacher les mots de passes](HASHING-PASSWORD)
+## Sécurité
+
+Si cette version du login est fonctionnelle, elle n'est pas du tout sécurisée.
+
+Plusieurs étapes clés sont importantes à mettre en place, comme [hacher les mots de passes](HASHING-PASSWORD).
