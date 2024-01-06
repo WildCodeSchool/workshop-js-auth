@@ -46,7 +46,7 @@ const add = async (req, res, next) => {
   }
 
   // Extract the item data from the request body
-  const item = { ...req.body, user_id: 0 }; // 0 is definitely a bad idea...
+  const item = { ...req.body, user_id: req.body.userId };
 
   try {
     // Insert the item into the database
