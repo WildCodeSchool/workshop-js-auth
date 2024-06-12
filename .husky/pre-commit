@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-fileList=$(git diff --staged --name-only :^package-lock.json :^frontend :^backend)
+fileList=$(git diff --staged --name-only :^package-lock.json :^README.md :^client :^server)
 
 echo '----- Checking Root...'
 
@@ -19,4 +19,5 @@ fi
 
 echo '----- Done!'
 
+npx validate-branch-name
 npm run lint

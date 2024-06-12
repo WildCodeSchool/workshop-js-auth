@@ -4,7 +4,7 @@
 
 Lors de l'interaction avec un serveur, garantir que les requêtes proviennent d'utilisateurs authentifiés et autorisés est une étape cruciale pour assurer la sécurité de votre application.
 
-Dans notre exemple, une vulnérabilité potentielle existe dans le fichier `backend/src/controllers/itemControllers.js`. Actuellement, la vérification de l'authentification se fonde sur la présence de `req.body.userId` :
+Dans notre exemple, une vulnérabilité potentielle existe dans le fichier `server/app/controllers/itemActions.js`. Actuellement, la vérification de l'authentification se fonde sur la présence de `req.body.userId` :
 
 ```js
 // Rappel : router.post("/items", itemControllers.add);
@@ -24,7 +24,7 @@ Cette approche est vulnérable à des manipulations côté client.
 Dans le code suivant (`frontend/src/pages/Home.jsx`), toute personne malveillante peut modifier la requête pour y injecter un ID de son choix :
 
 ```js
-const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/items`, {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/items`, {
   method: "post",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -59,7 +59,7 @@ Rien n'a changé en apparence, mais vous pouvez voir quelques modifications avec
 
 Côté serveur, la modification que nous avons apporté est de générer un jeton JWT lors du processus de connexion, plutôt que de renvoyer simplement les informations de l'utilisateur.
 
-Avant la modification dans `backend/src/controllers/authControllers.js` :
+Avant la modification dans `server/app/controllers/authActions.js` :
 
 ```js
 const login = async (req, res, next) => {
@@ -108,7 +108,7 @@ Vous devez y intégrer le minimum d'information qui seront utiles ensuite à vot
 ## Client 2.0
 
 ```js
-const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/items`, {
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/items`, {
   method: "post",
   headers: {
     "Content-Type": "application/json",
@@ -140,7 +140,7 @@ router.post("/items", verifyToken, itemControllers.add);
 Dans cet extrait, le middleware `verifyToken` est utilisé pour s'assurer que seuls les utilisateurs authentifiés peuvent faire une requête POST à la route `/items`.
 Le middleware `verifyToken` est responsable de la vérification de l'authenticité et de la validité du jeton d'authentification.
 
-Dans `backend/src/services/auth.js` :
+Dans `server/app/services/auth.js` :
 
 ```js
 const verifyToken = (req, res, next) => {
@@ -195,7 +195,7 @@ Dans `itemControllers.add`, la présence de l'objet `req.auth` (attaché par le 
 
 ## Mur d'authentification
 
-Reprenons le fichier `backend/src/router.js` :
+Reprenons le fichier `server/app/routers/api/router.js` :
 
 ```js
 // Importation des services d'authentification pour les opérations de sécurité

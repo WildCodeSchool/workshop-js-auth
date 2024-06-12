@@ -1,5 +1,3 @@
 #!/usr/bin/env sh
 
-sleep 5
-npm build
-npm start
+cd ./server && node ./bin/migrate.js && node index.js
