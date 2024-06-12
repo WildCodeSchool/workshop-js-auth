@@ -15,10 +15,11 @@ router.post("/items", itemActions.add);
 
 // Import userActions module for handling user-related operations
 const userActions = require("../../controllers/userActions");
+const { hashPassword } = require("../../services/auth");
 
 router.get("/users", userActions.browse);
 router.get("/users/:id", userActions.read);
-router.post("/users", userActions.add);
+router.post("/users", hashPassword, userActions.add);
 
 // Import authActions module for handling auth-related operations
 const authActions = require("../../controllers/authActions");
