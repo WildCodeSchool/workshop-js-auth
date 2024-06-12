@@ -10,7 +10,7 @@ function Home() {
 
   const titleRef = useRef();
 
-  const { user } = useOutletContext();
+  const { auth } = useOutletContext();
 
   const revalidator = useRevalidator();
 
@@ -24,15 +24,17 @@ function Home() {
         `${import.meta.env.VITE_API_URL}/api/items`,
         {
           method: "post",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`, // Inclusion du jeton JWT
+          },
           body: JSON.stringify({
             title: titleRef.current.value,
-            userId: user.id,
           }),
         }
       );
 
-      // Recharge la page si la création réussit
+      // Recharger la page si la création réussit
       if (response.status === 201) {
         revalidator.revalidate();
       } else {
@@ -47,7 +49,7 @@ function Home() {
 
   return (
     <>
-      {user != null && (
+      {auth != null && (
         <form onSubmit={handleSubmit}>
           <div>
             {/* Champ pour le title */}

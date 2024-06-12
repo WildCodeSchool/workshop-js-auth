@@ -6,7 +6,7 @@ function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const { setUser } = useOutletContext();
+  const { setAuth } = useOutletContext();
 
   // Hook pour la navigation
   const navigate = useNavigate();
@@ -31,9 +31,9 @@ function Login() {
 
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
-        const user = await response.json();
+        const auth = await response.json();
 
-        setUser(user);
+        setAuth(auth);
 
         navigate("/");
       } else {

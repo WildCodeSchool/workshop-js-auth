@@ -11,11 +11,10 @@ const itemActions = require("../../controllers/itemActions");
 
 router.get("/items", itemActions.browse);
 router.get("/items/:id", itemActions.read);
-router.post("/items", itemActions.add);
 
 // Import userActions module for handling user-related operations
 const userActions = require("../../controllers/userActions");
-const { hashPassword } = require("../../services/auth");
+const { hashPassword, verifyToken } = require("../../services/auth");
 
 router.get("/users", userActions.browse);
 router.get("/users/:id", userActions.read);
@@ -25,6 +24,12 @@ router.post("/users", hashPassword, userActions.add);
 const authActions = require("../../controllers/authActions");
 
 router.post("/login", authActions.login);
+
+// Authentication wall
+router.use(verifyToken);
+
+// This route is protected
+router.post("/items", itemActions.add);
 
 /* ************************************************************************* */
 
