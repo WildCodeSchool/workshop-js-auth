@@ -233,4 +233,4 @@ Après le mur, les routes sont protégées et nécessitent une authentification 
 
 ## Et le reste ?
 
-Si vous souhaitez explorer les détails du code lié à la gestion des tokens JWT dans cette branche, les modifications apportées sont visibles dans le [diff GitHub](https://github.com/WildCodeSchool/workshop-js-auth/compare/hash-password).
+Si vous souhaitez explorer les détails du code lié à la gestion des tokens JWT dans cette branche, les modifications apportées sont visibles dans le [diff GitHub](https://github.com/WildCodeSchool/workshop-js-auth/compare/hash-password...jwt).
