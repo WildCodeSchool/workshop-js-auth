@@ -39,9 +39,10 @@ const read: RequestHandler = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
-  // Only allowed if authentified
-  if (req.body.userId == null) {
-    res.sendStatus(401);
+  // We know someone is authenticated
+  // Only allowed if admin
+  if (req.auth.isAdmin === false) {
+    res.sendStatus(403);
     return;
   }
 
@@ -49,7 +50,7 @@ const add: RequestHandler = async (req, res, next) => {
     // Extract the item data from the request body
     const newItem = {
       title: req.body.title,
-      user_id: req.body.userId,
+      user_id: Number.parseInt(req.auth.sub),
     };
 
     // Create the item

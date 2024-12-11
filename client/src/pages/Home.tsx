@@ -14,6 +14,11 @@ type User = {
   is_admin: boolean;
 };
 
+type Auth = {
+  user: User;
+  token: string;
+};
+
 type Item = {
   id: number;
   title: string;
@@ -25,7 +30,7 @@ function Home() {
 
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const { user } = useOutletContext() as { user: User | null };
+  const { auth } = useOutletContext() as { auth: Auth | null };
 
   const revalidator = useRevalidator();
 
@@ -39,14 +44,18 @@ function Home() {
         `${import.meta.env.VITE_API_URL}/api/items`,
         {
           method: "post",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            /* conditional rendering ensures auth is not null */
+            Authorization: `Bearer ${(auth as Auth).token}`, // Inclusion du jeton JWT
+          },
           body: JSON.stringify({
             title:
               /* rendering process ensures the ref is defined before the form is submitted */
               (titleRef.current as HTMLInputElement).value,
             userId:
-              /* conditional rendering ensures user is not null */
-              (user as User).id,
+              /* conditional rendering ensures auth is not null */
+              (auth as Auth).user.id,
           }),
         },
       );
@@ -66,7 +75,7 @@ function Home() {
 
   return (
     <>
-      {user != null && (
+      {auth != null && (
         <form onSubmit={handleSubmit}>
           <div>
             {/* Champ pour le title */}

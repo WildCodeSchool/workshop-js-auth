@@ -10,13 +10,18 @@ type User = {
   is_admin: boolean;
 };
 
+type Auth = {
+  user: User;
+  token: string;
+};
+
 function Login() {
   // Références pour les champs email et mot de passe
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const { setUser } = useOutletContext() as {
-    setUser: (user: User | null) => void;
+  const { setAuth } = useOutletContext() as {
+    setAuth: (auth: Auth | null) => void;
   };
 
   // Hook pour la navigation
@@ -48,7 +53,7 @@ function Login() {
       if (response.status === 200) {
         const user = await response.json();
 
-        setUser(user);
+        setAuth(user);
 
         navigate("/");
       } else {

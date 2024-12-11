@@ -9,8 +9,13 @@ type User = {
   is_admin: boolean;
 };
 
+type Auth = {
+  user: User;
+  token: string;
+};
+
 function App() {
-  const [user, setUser] = useState(null as User | null);
+  const [auth, setAuth] = useState(null as Auth | null);
 
   return (
     <>
@@ -19,7 +24,7 @@ function App() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {user == null ? (
+          {auth == null ? (
             <>
               <li>
                 <Link to="/login">Login</Link>
@@ -33,7 +38,7 @@ function App() {
               <button
                 type="button"
                 onClick={() => {
-                  setUser(null);
+                  setAuth(null);
                 }}
               >
                 Logout
@@ -42,9 +47,9 @@ function App() {
           )}
         </ul>
       </nav>
-      {user && <p>Hello {user.email}</p>}
+      {auth && <p>Hello {auth.user.email}</p>}
       <main>
-        <Outlet context={{ user, setUser }} />
+        <Outlet context={{ auth, setAuth }} />
       </main>
     </>
   );
