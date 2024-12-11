@@ -1,0 +1,38 @@
+{
+  "name": "workshop-js-auth",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/WildCodeSchool/workshop-js-auth#readme",
+  "bugs": {
+    "url": "https://github.com/WildCodeSchool/workshop-js-auth/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WildCodeSchool/workshop-js-auth.git"
+  },
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "check": "biome check --error-on-warnings --no-errors-on-unmatched --staged . && npm run check-types --workspaces --if-present",
+    "clean": "node ./bin/clean",
+    "db:migrate": "npm run db:migrate --workspace=server",
+    "db:seed": "npm run db:seed --workspace=server",
+    "dev": "concurrently -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"npm:dev:*\"",
+    "dev:client": "npm run dev --workspace=client",
+    "dev:server": "npm run dev --workspace=server",
+    "prepare": "husky || true",
+    "start": "npm run start --workspace=server",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "keywords": [],
+  "author": "WildCodeSchool",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.2",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "concurrently": "^9.0.1",
+    "husky": "^9.1.6",
+    "validate-branch-name": "^1.3.1"
+  }
+}
