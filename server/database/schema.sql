@@ -1,7 +1,8 @@
 create table user (
   id int unsigned primary key auto_increment not null,
   email varchar(255) not null unique,
-  password varchar(255) not null
+  password varchar(255) not null,
+  is_admin boolean not null default false
 );
 
 create table item (

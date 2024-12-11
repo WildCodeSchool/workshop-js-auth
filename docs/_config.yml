@@ -1,0 +1,21 @@
+remote_theme: WildCodeSchool/workshops-jekyll-theme
+
+# disable the jekyll-titles-from-headings plugin,
+# so first h1 will not be used as prior title of you page
+titles_from_headings:
+  enabled: false
+
+defaults:
+  - scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default" # possible values: default or tic-tac
+
+style: dev # possible values: dev, data, ciber, design or wild.
+title: "Auth"
+description: "Développer une authentification sécurisée"
+# type: ''
+# main_image: '' # http or relative path to image
+show_clone: true
+show_toc: true
+lang: en
