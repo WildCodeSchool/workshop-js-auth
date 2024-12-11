@@ -5,7 +5,7 @@ import type { Result, Rows } from "../../../database/client";
 type User = {
   id: number;
   email: string;
-  password: string;
+  hashed_password: string;
   is_admin: boolean;
 };
 
@@ -15,8 +15,8 @@ class UserRepository {
   async create(user: Omit<User, "id" | "is_admin">) {
     // Execute the SQL INSERT query to add a new user to the "user" table
     const [result] = await databaseClient.query<Result>(
-      "insert into user (email, password) values (?, ?)",
-      [user.email, user.password],
+      "insert into user (email, hashed_password) values (?, ?)",
+      [user.email, user.hashed_password],
     );
 
     // Return the ID of the newly inserted user
@@ -36,7 +36,7 @@ class UserRepository {
     return rows[0] as User;
   }
 
-  async readByEmail(email: string) {
+  async readByEmailWithPassword(email: string) {
     // Execute the SQL SELECT query to retrieve a specific user by its email
     const [rows] = await databaseClient.query<Rows>(
       "select * from user where email = ?",
